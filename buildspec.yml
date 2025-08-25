@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo "Python has some SSL issues in this version so we force an upgrade which doesn't fix everything; don't be alarmed by the warnings."
+  build:
+    commands:
+      - echo "S3 Upload Beginning"
+      - python -V
+      - export ACCID=$(aws sts get-caller-identity --query 'Account' | tr -d '"')
+      - aws s3 sync . s3://$STAGING_BUCKET/ --delete --exclude "*" --include "*.json" --include "*.yml" --include "*.yaml"
+      - echo "S3 Upload Complete, updating cloudformation now..."
+      - aws configservice put-conformance-pack --conformance-pack-name="pci-dss-cpack-cicd" --template-s3-uri="s3://s3-pcidssautohealconfpack-$ACCID/pci-dss-cpack.yml" --delivery-s3-bucket="config-bucket-$ACCID"
+  post_build:
+    commands:
+      - echo "Deploy complete"
