@@ -829,7 +829,7 @@ Resources:
         AutomationAssumeRole:
           StaticValue:
             Values:
-              - "arn:aws:iam::533267068956:role/automationassumerole-us-east-1"
+              - "arn:aws:iam::529088275783:role/automationassumerole-us-east-1"
         SecurityGroupId:
           ResourceValue:
             Value: "RESOURCE_ID"
@@ -1434,7 +1434,7 @@ Resources:
         AutomationAssumeRole:
           StaticValue:
             Values:
-              - "arn:aws:iam::533267068956:role/automationassumerole-us-east-1"
+              - "arn:aws:iam::529088275783:role/automationassumerole-us-east-1"
         IpAddressToBlock:
           StaticValue:
             Values:
@@ -1446,7 +1446,7 @@ Resources:
         SsmControls:
           ConcurrentExecutionRatePercentage: 10
           ErrorPercentage: 10
-      Automatic: false
+      Automatic: true
       MaximumAutomaticAttempts: 10
       RetryAttemptSeconds: 600
 

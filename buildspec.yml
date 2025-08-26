@@ -10,7 +10,7 @@ phases:
       - export ACCID=$(aws sts get-caller-identity --query 'Account' | tr -d '"')
       - aws s3 sync . s3://$STAGING_BUCKET/ --delete --exclude "*" --include "*.json" --include "*.yml" --include "*.yaml"
       - echo "S3 Upload Complete, updating cloudformation now..."
-      - aws configservice put-conformance-pack --conformance-pack-name="hipaaa-cpack-cicd" --template-s3-uri="s3://s3-hipaaautohealconfpack-$ACCID/hipaa-cpack.yml" --delivery-s3-bucket="config-bucket-$ACCID"
+      - aws configservice put-conformance-pack --conformance-pack-name="hipaa-cpack-cicd" --template-s3-uri="s3://s3-hipaaautohealconfpack-$ACCID/hipaa-cpack-remediation.yml" --delivery-s3-bucket="config-bucket-$ACCID"
   post_build:
     commands:
       - echo "Deploy complete"
